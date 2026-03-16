@@ -2,6 +2,11 @@ from langchain_community.vectorstores import Qdrant
 from modules import config
 import os
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
+from dotenv import load_dotenv
+
+load_dotenv()
+QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
 embeddings = HuggingFaceEndpointEmbeddings(
     model=config.EMBEDDING_MODEL, 
@@ -11,8 +16,8 @@ embeddings = HuggingFaceEndpointEmbeddings(
 
 # connect
 db = Qdrant(
-    url=config.QDRANT_URL,
-    api_key=config.QDRANT_API_KEY,
+    url= QDRANT_URL,
+    api_key= QDRANT_API_KEY,
     collection_name=config.COLLECTION_NAME,
     embeddings=embeddings
 )
