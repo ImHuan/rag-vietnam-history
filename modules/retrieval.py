@@ -1,6 +1,6 @@
 from langchain_community.vectorstores import Qdrant
 from langchain_huggingface import HuggingFaceEmbeddings
-import config
+from modules import config
 
 embeddings = HuggingFaceEmbeddings(
     model_name=config.EMBEDDING_MODEL
