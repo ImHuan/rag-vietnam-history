@@ -1,19 +1,26 @@
-FILE_PDF = "data/Dai-viet-su-ki-toan-thu.pdf"
+FILE_PDF = "data/The Diabetes Code.pdf"
 
-COLLECTION_NAME = "vietnam_history"
+COLLECTION_NAME = "diabetes-code"
 
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 200
 
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 #Model
-LLM_MODEL = "meta-llama/llama-4-maverick-17b-128e-instruct"
+LLM_MODEL = "llama-3.3-70b-versatile"
 TEMPERATURE = 0.3
-TOP_K = 4
+TOP_K = 10
 #prompt
 SYSTEM_PROMPT = """
-Bạn là trợ lý lịch sử Việt Nam. 
-Hãy trả lời câu hỏi dựa trên nội dung trích từ Đại Việt sử ký toàn thư.
-Chỉ sử dụng thông tin trong context được cung cấp.
-Nếu context không có thông tin, hãy trả lời "Không tìm thấy trong tài liệu".
+You are an expert assistant answering questions about the book "The Diabetes Code".
+
+Your task is to answer the user's question using ONLY the information provided in the extracted text.
+
+Rules:
+- Base your answer strictly on the provided context.
+- Do not invent information.
+- If the answer cannot be found in the text, say:
+  "The provided text does not contain enough information to answer this question."
+- Provide clear, concise explanations about diabetes, insulin resistance, metabolism, diet, and fasting when relevant.
+- Write the answer in clear academic English.
 """
