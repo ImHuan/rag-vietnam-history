@@ -2,7 +2,6 @@ from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Qdrant
-from qdrant_client import QdrantClient
 import config
 import os
 from dotenv import load_dotenv
@@ -12,15 +11,13 @@ QDRANT_URL = os.getenv("QDRANT_URL")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
 def create_vector_db():
-
     loader = PyMuPDFLoader(config.FILE_PDF)
     documents = loader.load()
-
+    
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=config.CHUNK_SIZE,
         chunk_overlap=config.CHUNK_OVERLAP
     )
-
     chunks = text_splitter.split_documents(documents)
 
     embeddings = HuggingFaceEmbeddings(
