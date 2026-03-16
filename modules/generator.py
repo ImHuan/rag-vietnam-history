@@ -36,11 +36,13 @@ def generate_answer(query_text, documents):
     final_prompt = f"""
 {config.SYSTEM_PROMPT}
 
-Context:
+[EXTRACTED TEXT FROM THE BOOK]:
 {context_text}
 
-Question:
+[USER QUESTION]:
 {query_text}
+
+[ANSWER]:
 """
 
     # ===== Call Groq API =====
