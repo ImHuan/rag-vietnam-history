@@ -1,4 +1,5 @@
 from langchain_community.vectorstores import Qdrant
+from qdrant_client import QdrantClient  # <-- THÊM IMPORT NÀY
 from modules import config
 import os
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
@@ -14,10 +15,13 @@ embeddings = HuggingFaceEndpointEmbeddings(
     huggingfacehub_api_token=os.getenv("HF_TOKEN")
 )
 
-# connect
+client = QdrantClient(
+    url=QDRANT_URL,
+    api_key=QDRANT_API_KEY
+)
+
 db = Qdrant(
-    url= QDRANT_URL,
-    api_key= QDRANT_API_KEY,
+    client=client,  
     collection_name=config.COLLECTION_NAME,
     embeddings=embeddings
 )
