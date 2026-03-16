@@ -20,14 +20,14 @@ class QuestionRequest(BaseModel):
 def ask_question(request: QuestionRequest):
     try:
         question = request.question
-
-        
         docs = get_relevant_chunks(question)
-
-        
         answer = generate_answer(question, docs)
-
         return {"answer": answer}
     except Exception as e:
-        
+        import traceback
+        print("=== BẮT ĐẦU BÁO LỖI ===")
+        traceback.print_exc()  
+        print("=== KẾT THÚC BÁO LỖI ===")
         raise HTTPException(status_code=500, detail=str(e))
+
+
