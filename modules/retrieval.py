@@ -1,9 +1,12 @@
 from langchain_community.vectorstores import Qdrant
-from langchain_huggingface import HuggingFaceEmbeddings
 from modules import config
+import os
+from langchain_huggingface import HuggingFaceEndpointEmbeddings
 
-embeddings = HuggingFaceEmbeddings(
-    model_name=config.EMBEDDING_MODEL
+embeddings = HuggingFaceEndpointEmbeddings(
+    model=config.EMBEDDING_MODEL, 
+    task="feature-extraction",
+    huggingfacehub_api_token=os.getenv("HF_TOKEN")
 )
 
 # connect
